@@ -10,19 +10,17 @@ function solution(array) {
   // 1. 배열의 길이가 1이면 그대로 리턴
   if (array.length === 1) return array[0];
 
-  //   let obj = {};
+  let obj = {};
 
-  //   // 2. 배열의 요소를 객체의 key로, value는 1로 초기화
-  //   array.forEach((item) => {
-  //     obj[item] = obj[item] + 1 || 1;
-  //   });
+  // 2. 배열의 요소를 객체의 key로, value는 1로 초기화
+  array.forEach((item) => {
+    obj[item] = obj[item] + 1 || 1;
+  });
 
-  let obj = array.reduce((prev, curr) => {
-    prev[curr] = prev[curr] + 1 || 1;
-    return prev;
-  }, {});
-
-  console.log("obj: ", obj);
+  // let obj = array.reduce((prev, curr) => {
+  //   prev[curr] = prev[curr] + 1 || 1;
+  //   return prev;
+  // }, {});
 
   // 3. 객체를 배열로 변환
   for (let key in obj) {
