@@ -1,27 +1,26 @@
-function solution(array) {
-  const cnt = array.reduce(
-    (acc, cur) => ({
-      ...acc,
-      [cur]: (acc[cur] || 0) + 1,
-    }),
-    {}
-  );
+// function solution(my_string, n) {
+//   let answer = [];
 
-  console.log("1.cnt", cnt); // { '1': 1, '2': 1, '3': 4, '4': 1 }
+//   let spl = my_string.split("");
 
-  const items = Object.keys(cnt)
-    .map((key) => [Number(key), cnt[key]])
-    .sort((a, b) => b[1] - a[1]);
+//   spl.forEach((item) => {
+//     for (let i = 0; i < n; i++) {
+//       answer.push(item);
+//     }
+//   });
 
-  console.log("2.items", items); // [ [ 3, 4 ], [ 1, 1 ], [ 2, 1 ], [ 4, 1 ] ]
+//   return answer.join("");
+// }
 
-  // undefined 때문에 ?. 추가
-  if (items[0][1] === items?.[1]?.[1]) {
-    return -1;
-  }
+// function solution(my_string, n) {
+//   let answer = [...my_string].map((item) => item.repeat(n)).join("");
+//   return answer;
+// }
 
-  return items[0][0];
-}
+// console.log(solution("hello", 3));
 
-console.log(solution([1, 2, 3, 3, 3, 3, 4]));
-console.log(solution([1, 1, 2, 2]));
+const a = "hello";
+const b = ["hello", "world"];
+
+console.log([...a]);
+console.log([...b]);
