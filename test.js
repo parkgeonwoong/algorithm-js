@@ -1,26 +1,12 @@
-// function solution(my_string, n) {
-//   let answer = [];
+function solution(n) {
+  // let str = [...String(n)];
+  // let answer = str.reduce((acc, cur) => (acc) + parseInt(cur), 0);
+  // return answer;
 
-//   let spl = my_string.split("");
+  let str = String(n).split("");
+  let answer = 0;
+  str.forEach((item) => (answer += parseInt(item)));
+  return answer;
+}
 
-//   spl.forEach((item) => {
-//     for (let i = 0; i < n; i++) {
-//       answer.push(item);
-//     }
-//   });
-
-//   return answer.join("");
-// }
-
-// function solution(my_string, n) {
-//   let answer = [...my_string].map((item) => item.repeat(n)).join("");
-//   return answer;
-// }
-
-// console.log(solution("hello", 3));
-
-const a = "hello";
-const b = ["hello", "world"];
-
-console.log([...a]);
-console.log([...b]);
+console.log(solution(930211));
