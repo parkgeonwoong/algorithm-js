@@ -1,3 +1,8 @@
+/**
+ * @desc : 제곱수 판별하기
+ */
+
+// 내가 푼 것
 function solution(n) {
   let answer = 0;
   let arr = [];
@@ -19,6 +24,7 @@ function solution(n) {
   return answer;
 }
 
+// Math.sqrt() 사용
 const solution2 = (n) => {
   return Number.isInteger(Math.sqrt(n)) ? 1 : 2;
 };
