@@ -1,3 +1,10 @@
+/**
+ * @desc : 숨어있는 숫자
+ * @param {} my_string
+ * @returns
+ */
+
+// 내가 푼 방법
 function solution(my_string) {
   let answer = 0;
   let arr = [...my_string];
@@ -11,6 +18,7 @@ function solution(my_string) {
   return answer;
 }
 
+// 다른 사람 풀이
 const solution2 = (my_string) => {
   let a = my_string
     .replace(/[^0-9]/g, "")
