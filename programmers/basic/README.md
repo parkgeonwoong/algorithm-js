@@ -13,7 +13,7 @@ num % 1; -> 소수점만 나옴
 1. 파라미터가 배열이라면 reduce 사용
 2. Object로 변환
 3. 정렬이 필요하다? -> 다시 배열로 만든다
-4. Object.keys().map() 사용
+4. `Object.keys().map()` 사용
 
 <br>
 
@@ -99,3 +99,22 @@ Math.floor(hp / 5) + Math.floor((hp % 5) / 3) + ((hp % 5) % 3);
 ```js
 [...age.toString()].map(Number);
 ```
+
+<br>
+
+## 객체와 배열 비교하면서 문자열로 합치기
+
+생각해볼 방법
+
+- `reduce()`를 통하여 초기값을 "" 으로 하여 문자열로 반환할 수 있다
+
+```js
+return letter.split(" ").reduce((acc, cur) => acc + morse[cur], "");
+```
+
+<br>
+
+## 팩토리얼
+
+- 새로운 팩토리얼 함수를 만들자
+- 뽑는 문제라면 같은 갯수의 예외처리를 해야한다
