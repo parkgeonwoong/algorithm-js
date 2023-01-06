@@ -118,3 +118,14 @@ return letter.split(" ").reduce((acc, cur) => acc + morse[cur], "");
 
 - 새로운 팩토리얼 함수를 만들자
 - 뽑는 문제라면 같은 갯수의 예외처리를 해야한다
+
+<br>
+
+## 배열 교환
+
+- 구조분해할당을 이용해 교환할 수 있다.
+- 구조분해할당으로 엄청 많은 것을 할 수 있다
+
+```js
+[arr[num1], arr[num2]] = [arr[num2], arr[num1]];
+```
