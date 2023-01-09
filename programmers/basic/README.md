@@ -129,3 +129,12 @@ return letter.split(" ").reduce((acc, cur) => acc + morse[cur], "");
 ```js
 [arr[num1], arr[num2]] = [arr[num2], arr[num1]];
 ```
+
+<br>
+
+## 배열에 0을 채우는 방식
+
+1. `new Array(n).fill(0)`
+2. `Array.from({ length: n}, () => 0)`
+
+- `Array.from({ length: n }, (v, i) => i )` 이런 방식으로 → 인덱스 만큼 증가하는 배열을 만든다
