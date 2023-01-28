@@ -10,6 +10,7 @@ function solution(id_pw, db) {
   return answer;
 }
 
+// 남의 풀이
 function solution(id_pw, db) {
   let dbs = db.filter((v) => v[0] === id_pw[0]);
 
