@@ -1,54 +1,21 @@
-function solution(id_pw, db) {
-  let answer = "";
+function solution(score) {
+  let avg = score.map((v) => (v[0] + v[1]) / 2);
+  let sorted = avg.slice().sort((a, b) => b - a);
 
-  for (let i = 0; i < db.length; i++) {
-    if (id_pw[0] === db[i][0] && id_pw[1] === db[i][1]) answer = "login";
-    if (id_pw[0] === db[i][0] && id_pw[1] !== db[i][1]) answer = "wrong pw";
-    if (id_pw[0] !== db[i][0] && id_pw[1] !== db[i][1]) answer = "fail";
-  }
-  console.log(answer);
-  return answer;
+  console.log("avg", avg);
+  console.log("sorted", sorted);
+
+  avg.map((v) => console.log(sorted.indexOf(v) + 1));
+
+  return avg.map((v) => sorted.indexOf(v) + 1);
 }
 
-function solution(id_pw, db) {
-  let dbs = db.filter((v) => v[0] === id_pw[0]);
-
-  if (!dbs.length) return "fail";
-
-  for (let i of dbs) {
-    if (i[1] === id_pw[1]) return "login";
-  }
-
-  return "wrong pw";
-
-  // console.log(dbs);
-}
-
-console.log(
-  solution(
-    ["meosseugi", "1234"],
-    [
-      ["rardss", "123"],
-      ["yyoom", "1234"],
-      ["meosseugi", "1234"],
-    ]
-  )
-);
-
-solution(
-  ["programmer01", "15789"],
-  [
-    ["programmer02", "111111"],
-    ["programmer00", "134"],
-    ["programmer01", "1145"],
-  ]
-);
-
-solution(
-  ["rabbit04", "98761"],
-  [
-    ["jaja11", "98761"],
-    ["krong0313", "29440"],
-    ["rabbit00", "111333"],
-  ]
-);
+solution([
+  [80, 70],
+  [70, 80],
+  [30, 50],
+  [90, 100],
+  [100, 90],
+  [100, 100],
+  [10, 30],
+]);
