@@ -14,6 +14,7 @@ function solution(n) {
   return x3;
 }
 
+// while 방식
 function solution(n) {
   let count = 0;
   let x3 = 1;
