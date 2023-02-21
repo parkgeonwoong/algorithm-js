@@ -1,34 +1,33 @@
-function solution(n) {
-  let x3 = 0;
+function solution(polynomial) {
+  const arr = polynomial.split(" + ");
 
-  for (let i = 1; i <= n; i++) {
-    x3 += 1;
+  // 1. x계산
+  const xSum = arr.reduce((acc, cur) => {
+    if (cur === "x") return acc + 1;
+    if (cur.includes("x")) return acc + Number(cur.replace("x", ""));
+    return acc;
+  }, 0);
 
-    for (let j = 0; j <= n; j++) {
-      if (x3 % 3 === 0 || x3.toString().includes("3")) {
-        x3 += 1;
-      }
-    }
-  }
+  // 2. 상수계산
+  const cnt = arr.reduce((acc, cur) => {
+    if (!cur.includes("x")) return acc + Number(cur);
+    return acc;
+  }, 0);
 
-  return x3;
+  console.log("xSum: ", xSum, "cnt: ", cnt);
+
+  // 3. 합치기
+  const answer = `${
+    xSum
+      ? xSum === 1
+        ? "x" + (cnt ? " + " + cnt : "")
+        : xSum + "x" + (cnt ? " + " + cnt : "")
+      : "" + (cnt ? cnt : "")
+  }`;
+
+  console.log("answer: ", answer);
+  return answer;
 }
 
-function solution(n) {
-  let count = 0;
-  let x3 = 1;
-
-  while (count < n) {
-    if (x3 % 3 !== 0 && !x3.toString().includes("3")) {
-      count += 1;
-    }
-    x3 += 1;
-    console.log("x3", x3 - 1);
-  }
-
-  return x3 - 1;
-}
-
-solution(15);
-
-// solution(40);
+solution("x + 9x ");
+solution("2 + 1");
