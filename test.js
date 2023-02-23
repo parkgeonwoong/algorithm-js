@@ -1,33 +1,16 @@
-function solution(polynomial) {
-  const arr = polynomial.split(" + ");
+function solution(num, total) {
+  let answer = [];
+  const start = ((2 * total) / num - num + 1) / 2;
 
-  // 1. x계산
-  const xSum = arr.reduce((acc, cur) => {
-    if (cur === "x") return acc + 1;
-    if (cur.includes("x")) return acc + Number(cur.replace("x", ""));
-    return acc;
-  }, 0);
+  for (let i = 0; i < num; i++) {
+    answer.push(start + i);
+  }
 
-  // 2. 상수계산
-  const cnt = arr.reduce((acc, cur) => {
-    if (!cur.includes("x")) return acc + Number(cur);
-    return acc;
-  }, 0);
-
-  console.log("xSum: ", xSum, "cnt: ", cnt);
-
-  // 3. 합치기
-  const answer = `${
-    xSum
-      ? xSum === 1
-        ? "x" + (cnt ? " + " + cnt : "")
-        : xSum + "x" + (cnt ? " + " + cnt : "")
-      : "" + (cnt ? cnt : "")
-  }`;
-
-  console.log("answer: ", answer);
   return answer;
 }
 
-solution("x + 9x ");
-solution("2 + 1");
+// solution(3, 12);
+// solution(5, 15);
+// solution(4, 14);
+// solution(5, 5);
+solution(5, 0);
