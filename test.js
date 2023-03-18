@@ -1,34 +1,18 @@
-// 겹치는 선분의 길이
-function solution(lines) {
-  let answer = 0;
-  let lineMap = new Array(200).fill(0); // -100 ~ 100
+// 길이가 서로 다른 A, B, C 세 개의 막대 길이가 주어지면 이 세 막대로 삼각형을 만들 수 있으면 “YES"를 출력하고,
+// 만들 수 없으면 ”NO"를 출력한다.
 
-  for (let i = 0; i < 3; i++) {
-    let left = lines[i][0];
-    let right = lines[i][1];
+function solution(a, b, c) {
+  let answer = "YES",
+    max;
+  const sum = a + b + c;
 
-    for (let j = left; j < right; j++) {
-      lineMap[j + 100] += 1;
-    }
-  }
+  a < b ? (max = b) : (max = a);
+  if (c > max) max = c;
+  if (sum - max <= max) answer = "NO";
 
-  for (let i in lineMap) {
-    if (lineMap[i] > 1) {
-      answer += 1;
-    }
-  }
-
+  console.log(answer);
   return answer;
 }
 
-solution([
-  [0, 1],
-  [2, 5],
-  [3, 9],
-]);
-
-solution([
-  [0, 5],
-  [3, 9],
-  [1, 10],
-]);
+solution(6, 11, 7);
+solution(13, 33, 17);
