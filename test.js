@@ -1,18 +1,15 @@
-// 길이가 서로 다른 A, B, C 세 개의 막대 길이가 주어지면 이 세 막대로 삼각형을 만들 수 있으면 “YES"를 출력하고,
-// 만들 수 없으면 ”NO"를 출력한다.
+const arr = [25, 23, 11, 47, 53, 17, 33];
+const arr2 = [12, 20, 54, 30, 87, 91, 30];
 
-function solution(a, b, c) {
-  let answer = "YES",
-    max;
-  const sum = a + b + c;
+function solution(day, arr) {
+  let answer = 0;
 
-  a < b ? (max = b) : (max = a);
-  if (c > max) max = c;
-  if (sum - max <= max) answer = "NO";
+  for (let i of arr) {
+    const result = String(i).slice(1, 2);
+    if (day === Number(result)) answer += 1;
+  }
 
-  console.log(answer);
   return answer;
 }
 
-solution(6, 11, 7);
-solution(13, 33, 17);
+console.log(solution(0, arr2));
