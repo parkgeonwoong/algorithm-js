@@ -1,10 +1,11 @@
+let str = ["good", "time", "good", "time", "student"];
+
 function solution(str) {
-  if (str.length % 2 === 1) {
-    return str[Math.floor(str.length / 2)];
-  } else {
-    return [str[str.length / 2 - 1], str[str.length / 2]].join(" ");
-  }
+  let answer;
+
+  answer = str.filter((v, i) => str.indexOf(v) === i);
+
+  return answer.join(" ");
 }
 
-console.log(solution("study"));
-console.log(solution("good"));
+console.log(solution(str));
