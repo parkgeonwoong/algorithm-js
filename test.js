@@ -1,17 +1,33 @@
-function solution(a, b) {
-  let answer = "";
-
-  for (let i = 0; i < a.length; i++) {
-    if (a[i] === b[i]) answer += "D";
-    else if (a[i] === 1 && b[i] === 3) answer += "A";
-    else if (a[i] === 2 && b[i] === 1) answer += "A";
-    else if (a[i] === 3 && b[i] === 2) answer += "A";
-    else answer += "B";
+function solution(dots) {
+  if (calculate(dots[0], dots[1]) === calculate(dots[2], dots[3])) {
+    return 1;
+  } else if (calculate(dots[0], dots[2]) === calculate(dots[1], dots[3])) {
+    return 1;
+  } else if (calculate(dots[0], dots[3]) === calculate(dots[1], dots[2])) {
+    return 1;
   }
 
-  return answer;
+  return 0;
 }
 
-let a = [2, 3, 3, 1, 3];
-let b = [1, 1, 2, 2, 3];
-console.log(solution(a, b));
+function calculate(arr1, arr2) {
+  return (arr2[1] - arr1[1]) / (arr2[0] - arr1[0]);
+}
+
+console.log(
+  solution([
+    [1, 4],
+    [9, 2],
+    [3, 8],
+    [11, 6],
+  ])
+);
+
+console.log(
+  solution([
+    [3, 5],
+    [4, 1],
+    [2, 4],
+    [5, 10],
+  ])
+);
