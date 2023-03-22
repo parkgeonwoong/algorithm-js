@@ -1,33 +1,17 @@
-function solution(dots) {
-  if (calculate(dots[0], dots[1]) === calculate(dots[2], dots[3])) {
-    return 1;
-  } else if (calculate(dots[0], dots[2]) === calculate(dots[1], dots[3])) {
-    return 1;
-  } else if (calculate(dots[0], dots[3]) === calculate(dots[1], dots[2])) {
-    return 1;
+function solution(arr) {
+  const n = arr.length;
+  let answer = Array.from({ length: n }, () => 1);
+
+  // 기준 for문
+  for (let i = 0; i < n; i++) {
+    // 비교 for문
+    for (let j = 0; j < n; j++) {
+      if (arr[j] > arr[i]) answer[i] += 1;
+    }
   }
 
-  return 0;
+  return answer;
 }
 
-function calculate(arr1, arr2) {
-  return (arr2[1] - arr1[1]) / (arr2[0] - arr1[0]);
-}
-
-console.log(
-  solution([
-    [1, 4],
-    [9, 2],
-    [3, 8],
-    [11, 6],
-  ])
-);
-
-console.log(
-  solution([
-    [3, 5],
-    [4, 1],
-    [2, 4],
-    [5, 10],
-  ])
-);
+let arr = [87, 89, 92, 100, 76];
+console.log(solution(arr));
