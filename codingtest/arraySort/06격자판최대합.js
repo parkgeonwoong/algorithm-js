@@ -1,3 +1,7 @@
+/**
+ * N*N의 격자판이 주어지면 각 행의 합, 각 열의 합, 두 대각선 중 가장 큰 합을 출력합니다.
+ */
+
 function solution(arr) {
   const n = arr.length;
   let vertical = 0;
