@@ -1,14 +1,11 @@
-function solution(babbling) {
-  let answer = 0;
-  const reg = /^(aya|ye|woo|ma)+$/;
+function solution(str) {
+  str = str.toLowerCase();
 
-  babbling.forEach((word) => {
-    if (reg.test(word)) answer++;
-  });
+  if (str.split("").reverse().join("") !== str) return "NO";
 
-  return answer;
+  return "YES";
 }
 
-const arr = ["aya", "ye", "woo", "ma"];
+let str = "goooG";
 
-solution(["ayaye", "uuuma", "ye", "yemawoo", "ayaa"]);
+console.log(solution(str));
