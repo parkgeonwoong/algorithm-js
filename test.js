@@ -1,31 +1,20 @@
-function solution(str, t) {
-  let answer = [];
-  let p = 1000;
-  const n = str.length;
+function solution(str) {
+  let answer = "";
+  let cnt = 1;
+  str = str + " ";
 
-  // 좌 -> 우
-  for (let i = 0; i < n; i++) {
-    if (str[i] === t) {
-      p = 0;
-      answer.push(p);
-    } else {
-      p++;
-      answer.push(p);
-    }
-  }
-
-  p = 1000;
-
-  // 우 -> 좌
-  for (let i = n - 1; i >= 0; i--) {
-    if (str[i] === t) p = 0;
+  for (let i = 0; i < str.length - 1; i++) {
+    if (str[i] === str[i + 1]) cnt++;
     else {
-      p++;
-      if (answer[i] > p) answer[i] = p;
+      answer += str[i];
+      if (cnt > 1) answer += cnt + "";
+      cnt = 1;
     }
   }
 
   return answer;
 }
 
-console.log(solution("teachermode", "e"));
+let str = "KKHSSSSSSSE";
+
+console.log(solution(str));
