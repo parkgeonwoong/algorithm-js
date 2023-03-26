@@ -1,20 +1,9 @@
-function solution(str) {
-  let answer = "";
-  let cnt = 1;
-  str = str + " ";
-
-  for (let i = 0; i < str.length - 1; i++) {
-    if (str[i] === str[i + 1]) cnt++;
-    else {
-      answer += str[i];
-      if (cnt > 1) answer += cnt + "";
-      cnt = 1;
-    }
-  }
+function solution(arr) {
+  let answer;
 
   return answer;
 }
 
-let str = "KKHSSSSSSSE";
+let arr = [32, 55, 62, 20, 250, 370, 200, 30, 100];
 
-console.log(solution(str));
+console.log(solution(arr));
