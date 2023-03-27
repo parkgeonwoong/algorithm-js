@@ -1,35 +1,33 @@
-function solution(arr) {
+function solution(m, arr) {
   let answer = 0;
-  const m = arr.length;
-  const n = arr[0].length;
+  const n = arr.length;
 
-  for (let i = 1; i <= n; i++) {
-    for (let j = 1; j <= n; j++) {
-      let cnt = 0;
+  arr.sort((a, b) => a[0] + a[1] - (b[0] + b[1]));
+  console.log(arr);
 
-      for (let k = 0; k < m; k++) {
-        let mento = 0;
-        let mentee = 0;
+  for (let i = 0; i < n; i++) {
+    let money = m - (arr[i][0] / 2 + arr[i][1]);
+    let cnt = 1;
 
-        for (let s = 0; s < n; s++) {
-          if (arr[k][s] === i) mento = s;
-          if (arr[k][s] === j) mentee = s;
-        }
-
-        if (mento < mentee) cnt++;
+    for (let j = 0; j < n; j++) {
+      if (j !== i && arr[j][0] + arr[j][1] <= money) {
+        money -= arr[j][0] + arr[j][1];
+        cnt++;
       }
-
-      if (cnt === m) answer++;
     }
+
+    answer = Math.max(cnt, answer);
   }
 
   return answer;
 }
 
 let arr = [
-  [3, 4, 1, 2],
-  [4, 3, 2, 1],
-  [3, 1, 4, 2],
+  [6, 6],
+  [2, 2],
+  [4, 3],
+  [4, 5],
+  [10, 3],
 ];
 
-console.log(solution(arr));
+console.log(solution(28, arr));
