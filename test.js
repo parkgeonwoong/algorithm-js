@@ -1,32 +1,35 @@
 function solution(arr) {
-  let answer = [];
+  let answer = 0;
+  const m = arr.length;
+  const n = arr[0].length;
 
-  // 1. 숫자 뒤집기
-  for (let x of arr) {
-    let res = 0;
-    while (x) {
-      const t = x % 10;
-      res = res * 10 + t;
-      x = Math.floor(x / 10);
+  for (let i = 1; i <= n; i++) {
+    for (let j = 1; j <= n; j++) {
+      let cnt = 0;
+
+      for (let k = 0; k < m; k++) {
+        let mento = 0;
+        let mentee = 0;
+
+        for (let s = 0; s < n; s++) {
+          if (arr[k][s] === i) mento = s;
+          if (arr[k][s] === j) mentee = s;
+        }
+
+        if (mento < mentee) cnt++;
+      }
+
+      if (cnt === m) answer++;
     }
-    // 2. 소수 판별
-    if (isPrime(res)) answer.push(res);
   }
 
   return answer;
 }
 
-function isPrime(N) {
-  // 1은 소수가 아니다.
-  if (N === 1) return false;
-
-  for (let i = 2; i <= parseInt(Math.sqrt(N)); i++) {
-    if (N % i === 0) return false;
-  }
-  // 모두 나누어 떨어지지 않으면 N은 소수이다.
-  return true;
-}
-
-let arr = [32, 55, 62, 20, 250, 370, 200, 30, 100];
+let arr = [
+  [3, 4, 1, 2],
+  [4, 3, 2, 1],
+  [3, 1, 4, 2],
+];
 
 console.log(solution(arr));
