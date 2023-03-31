@@ -1,23 +1,14 @@
-function solution(str) {
+function solution(n, k) {
   let answer = 0;
-  str = " " + str;
-  let stack = [];
+  let queue = Array.from({ length: n }, (_, i) => i + 1);
 
-  for (let i = 1; i < str.length; i++) {
-    if (str[i] === "(") stack.push(str[i]);
-    else {
-      stack.pop();
-      if (str[i - 1] === "(") {
-        answer += stack.length;
-      } else answer++;
-    }
+  while (queue.length) {
+    for (let i = 1; i < k; i++) queue.push(queue.shift());
+    queue.shift();
+    if (queue.length === 1) answer = queue.shift();
   }
 
   return answer;
 }
 
-let a = "()(((()())(())()))(())";
-console.log(solution(a));
-
-let b = "(((()(()()))(())()))(()())";
-console.log(solution(b));
+console.log(solution(8, 3));
