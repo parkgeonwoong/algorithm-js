@@ -1,3 +1,9 @@
+/**
+ * 카카오 기출
+ *
+ * 문제가 너무 길다. 이해는 했는데 구현이 쉽지 않다
+ */
+
 function solution(board, moves) {
   let answer = 0;
   let stack = [];
