@@ -1,14 +1,17 @@
-function solution(n, k) {
-  let answer = 0;
-  let queue = Array.from({ length: n }, (_, i) => i + 1);
+function solution(need, plan) {
+  let answer = "YES";
+  let queue = need.split("");
 
-  while (queue.length) {
-    for (let i = 1; i < k; i++) queue.push(queue.shift());
-    queue.shift();
-    if (queue.length === 1) answer = queue.shift();
+  for (let x of plan) {
+    if (queue.includes(x)) {
+      if (x !== queue.shift()) return "NO";
+    }
   }
+  if (queue.length > 0) return "NO";
 
   return answer;
 }
 
-console.log(solution(8, 3));
+let a = "CBA";
+let b = "CBDAGE";
+console.log(solution(a, b));
