@@ -1,3 +1,7 @@
+/**
+ * 한국정보올림피아드 - 쇠막대기 문제
+ */
+
 function solution(str) {
   let answer = 0;
   str = " " + str;
