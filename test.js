@@ -1,17 +1,14 @@
-function solution(need, plan) {
-  let answer = "YES";
-  let queue = need.split("");
-
-  for (let x of plan) {
-    if (queue.includes(x)) {
-      if (x !== queue.shift()) return "NO";
+function solution(str) {
+  for (let i = 0; i < str.length; i++) {
+    for (let j = 0; j < str.length - 1 - i; j++) {
+      if (str[j] > str[j + 1]) {
+        [str[j], str[j + 1]] = [str[j + 1], str[j]];
+      }
     }
   }
-  if (queue.length > 0) return "NO";
 
-  return answer;
+  return str;
 }
 
-let a = "CBA";
-let b = "CBDAGE";
-console.log(solution(a, b));
+let arr = [13, 5, 11, 7, 23, 15];
+console.log(solution(arr));
