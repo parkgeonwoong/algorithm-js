@@ -1,14 +1,18 @@
 function solution(str) {
-  for (let i = 0; i < str.length; i++) {
-    for (let j = 0; j < str.length - 1 - i; j++) {
-      if (str[j] > str[j + 1]) {
-        [str[j], str[j + 1]] = [str[j + 1], str[j]];
-      }
+  for (let i = 1; i < str.length; i++) {
+    let temp = str[i];
+    let j = i;
+
+    while (j > 0 && str[j - 1] > temp) {
+      str[j] = str[j - 1];
+      j--;
     }
+
+    str[j] = temp;
   }
 
   return str;
 }
 
-let arr = [13, 5, 11, 7, 23, 15];
+let arr = [11, 7, 5, 6, 10, 9];
 console.log(solution(arr));
