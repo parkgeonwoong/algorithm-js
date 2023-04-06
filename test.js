@@ -1,42 +1,32 @@
-/**
- * 이분탐색을 사용하려고 한다
- * 범위 산정 (left, right) -> 가장큰값부터 ~ 총합전까지
- * mid를 기준으로 담아놓기 위함
- * 갯수 <= m 더 크다는 소리니까 right = mid - 1
- * else left = mid +1
- *
- *
- */
-
-const count = (songs, mid) => {
-  let sum = 0;
+function count(stable, dist) {
   let cnt = 1;
+  let ep = stable[0];
 
-  for (let x of songs) {
-    if (sum + x > mid) {
+  for (let i = 1; i < stable.length; i++) {
+    if (stable[i] - ep >= dist) {
       cnt++;
-      sum = x;
-    } else sum += x;
+      ep = stable[i];
+    }
   }
-
   return cnt;
-};
+}
 
-function solution(m, songs) {
+function solution(c, stable) {
   let answer;
-  let left = Math.max(...songs);
-  let right = songs.reduce((a, b) => a + b, 0);
+  stable.sort((a, b) => a - b);
+  let left = 1;
+  let right = stable[stable.length - 1];
 
   while (left <= right) {
     let mid = parseInt((left + right) / 2);
-    if (count(songs, mid) <= m) {
+    if (count(stable, mid) >= c) {
       answer = mid;
-      right = mid - 1;
-    } else left = mid + 1;
+      left = mid + 1;
+    } else right = mid - 1;
   }
 
   return answer;
 }
 
-let arr = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+let arr = [1, 2, 8, 4, 9];
 console.log(solution(3, arr));
