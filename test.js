@@ -1,27 +1,28 @@
-function solution(n) {
-  let answer = [];
-  let check = Array.from({ length: n + 1 }, () => 0);
+function solution(arr) {
+  let answer = "NO";
+  let total = arr.reduce((a, b) => a + b, 0);
+  let n = arr.length;
+  let flag = 0;
 
-  function DFS(v) {
-    if (v === n + 1) {
-      let temp = "";
-      for (let i = 1; i <= n; i++) {
-        if (check[i] === 1) temp += i + " ";
+  function DFS(Level, sum) {
+    if (flag) return;
+
+    if (n === Level) {
+      if (total - sum === sum) {
+        answer = "YES";
+        flag = 1;
       }
-      if (temp.length > 0) answer.push(temp.trim());
-    }
-
-    // 재귀
-    else {
-      check[v] = 1;
-      DFS(v + 1);
-
-      check[v] = 0;
-      DFS(v + 1);
+    } else {
+      DFS(Level + 1, sum + arr[Level]);
+      DFS(Level + 1, sum);
     }
   }
-  DFS(1);
+
+  DFS(0, 0);
+
   return answer;
 }
 
-console.log(solution(3));
+let arr = [1, 3, 5, 6, 7, 10];
+
+console.log(solution(arr));
