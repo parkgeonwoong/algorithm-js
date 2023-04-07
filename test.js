@@ -1,17 +1,10 @@
-function solution(arr) {
-  let answer = "NO";
-  let total = arr.reduce((a, b) => a + b, 0);
-  let n = arr.length;
-  let flag = 0;
+function solution(c, arr) {
+  let answer = 0;
 
   function DFS(Level, sum) {
-    if (flag) return;
-
-    if (n === Level) {
-      if (total - sum === sum) {
-        answer = "YES";
-        flag = 1;
-      }
+    if (c < sum) return;
+    if (Level === arr.length) {
+      answer = Math.max(answer, sum);
     } else {
       DFS(Level + 1, sum + arr[Level]);
       DFS(Level + 1, sum);
@@ -19,10 +12,8 @@ function solution(arr) {
   }
 
   DFS(0, 0);
-
   return answer;
 }
 
-let arr = [1, 3, 5, 6, 7, 10];
-
-console.log(solution(arr));
+let arr = [81, 58, 42, 33, 61];
+console.log(solution(259, arr));
