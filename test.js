@@ -1,23 +1,28 @@
 function solution(n, m) {
-  let answer = [];
-  let temp = Array.from({ length: m }, () => 0);
+  let answer = Number.MAX_SAFE_INTEGER;
 
-  function DFS(Level) {
-    if (Level === m) {
-      answer.push([...temp]);
+  function DFS(Level, total) {
+    if (total < 0) return;
+
+    if (Level >= answer) return;
+
+    if (total === 0) {
+      console.log(Level);
+      answer = Math.min(answer, Level);
+      return;
     }
     //
     else {
-      for (let i = 1; i <= n; i++) {
-        temp[Level] = i;
-        DFS(Level + 1);
+      for (let x of n) {
+        DFS(Level + 1, total - x);
       }
     }
   }
 
-  DFS(0);
+  DFS(0, m);
 
-  return [answer, answer.length];
+  return answer;
 }
 
-console.log(solution(3, 2));
+let arr = [1, 2, 5];
+console.log(solution(arr, 15));
