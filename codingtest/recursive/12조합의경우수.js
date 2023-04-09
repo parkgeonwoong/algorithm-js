@@ -1,3 +1,7 @@
+/**
+ * 재귀를 이용해 조합수를 구해주는 프로그램을 작성하세요.
+ */
+
 function solution(n, c) {
   let answer = 0;
 
