@@ -1,24 +1,46 @@
-function solution(n, k, arr, m) {
+function solution(n, arr) {
   let answer = 0;
-  let temp = Array.from({ length: k });
+  let graph = Array.from(Array(n + 1), () => Array(n + 1).fill(0));
+  let chk = Array.from({ length: n + 1 }, () => 0);
+  let path = [];
 
-  function DFS(L, s, sum) {
-    if (L === k) {
-      if (sum % m === 0) answer++;
-      console.log(temp, sum);
-    }
-    //
-    else {
-      for (let i = s; i < n; i++) {
-        temp[L] = arr[i];
-        DFS(L + 1, i + 1, sum + arr[i]);
+  for (let [a, b] of arr) {
+    graph[a][b] = 1;
+  }
+
+  function DFS(v) {
+    if (v === n) {
+      answer++;
+      console.log(path);
+    } else {
+      for (let i = 1; i <= n; i++) {
+        if (graph[v][i] === 1 && chk[i] === 0) {
+          chk[i] = 1;
+          path.push(i);
+          DFS(i);
+          chk[i] = 0;
+          path.pop();
+        }
       }
     }
   }
 
-  DFS(0, 0, 0);
+  chk[1] = 1;
+  path.push(1);
+  DFS(1);
+
   return answer;
 }
 
-let arr = [2, 4, 5, 8, 12];
-console.log(solution(5, 3, arr, 6));
+let arr = [
+  [1, 2],
+  [1, 3],
+  [1, 4],
+  [2, 1],
+  [2, 3],
+  [2, 5],
+  [3, 4],
+  [4, 2],
+  [4, 5],
+];
+console.log(solution(5, arr));
