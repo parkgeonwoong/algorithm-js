@@ -13,6 +13,38 @@ function solution(n, arr) {
     if (n === v) {
       answer++;
     } else {
+      for (let nv of graph[v]) {
+        if (chk[nv] === 0) {
+          chk[nv] = 1;
+          DFS(nv);
+          chk[nv] = 0;
+        }
+      }
+    }
+  }
+
+  chk[1] = 1;
+  DFS(1);
+
+  return answer;
+}
+
+//
+function solution(n, arr) {
+  let answer = 0;
+  let graph = Array.from(Array(n + 1), () => Array());
+  let chk = Array.from({ length: n + 1 }, () => 0);
+
+  for (let [a, b] of arr) {
+    graph[a].push(b);
+  }
+
+  console.log(graph);
+
+  function DFS(v) {
+    if (n === v) {
+      answer++;
+    } else {
       for (let i = 0; i < graph[v].length; i++) {
         if (chk[graph[v][i]] === 0) {
           chk[graph[v][i]] = 1;
