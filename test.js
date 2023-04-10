@@ -1,43 +1,37 @@
-function solution(n, arr) {
+function solution(board) {
   let answer = 0;
-  let graph = Array.from(Array(n + 1), () => Array());
-  let chk = Array.from({ length: n + 1 }, () => 0);
+  let dx = [-1, 0, 1, 0];
+  let dy = [0, 1, 0, -1];
 
-  for (let [a, b] of arr) {
-    graph[a].push(b);
-  }
-
-  console.log(graph);
-
-  function DFS(v) {
-    if (n === v) {
-      answer++;
-    } else {
-      for (let i = 0; i < graph[v].length; i++) {
-        if (chk[graph[v][i]] === 0) {
-          chk[graph[v][i]] = 1;
-          DFS(graph[v][i]);
-          chk[graph[v][i]] = 0;
+  function DFS(x, y) {
+    if (x === 6 && y === 6) answer++;
+    else {
+      for (let k = 0; k < 4; k++) {
+        let nx = x + dx[k];
+        let ny = y + dy[k];
+        if (nx >= 0 && nx <= 6 && ny >= 0 && ny <= 6 && board[nx][ny] === 0) {
+          board[nx][ny] = 1;
+          DFS(nx, ny);
+          board[nx][ny] = 0;
         }
       }
     }
   }
 
-  chk[1] = 1;
-  DFS(1);
+  board[0][0] = 1;
+  DFS(0, 0);
 
   return answer;
 }
 
 let arr = [
-  [1, 2],
-  [1, 3],
-  [1, 4],
-  [2, 1],
-  [2, 3],
-  [2, 5],
-  [3, 4],
-  [4, 2],
-  [4, 5],
+  [0, 0, 0, 0, 0, 0, 0],
+  [0, 1, 1, 1, 1, 1, 0],
+  [0, 0, 0, 1, 0, 0, 0],
+  [1, 1, 0, 1, 0, 1, 1],
+  [1, 1, 0, 0, 0, 0, 1],
+  [1, 1, 0, 1, 1, 0, 0],
+  [1, 0, 0, 0, 0, 0, 0],
 ];
-console.log(solution(5, arr));
+
+console.log(solution(arr));
