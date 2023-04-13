@@ -1,15 +1,23 @@
-function solution(n) {
-  let answer = 0;
-  let dy = Array.from({ length: n + 1 }, () => 0);
+// 최대 부분 증가수열
 
-  dy[1] = 1;
-  dy[2] = 2;
-  for (let i = 3; i <= n; i++) {
-    dy[i] = dy[i - 2] + dy[i - 1];
+function solution(arr) {
+  let answer = 0;
+  let dy = Array.from({ length: arr.length }, () => 0);
+  dy[0] = 1;
+
+  for (let i = 1; i < arr.length; i++) {
+    let max = 0;
+
+    for (let j = i - 1; j >= 0; j--) {
+      if (arr[j] < arr[i] && dy[j] > max) {
+        max = dy[j];
+      }
+    }
+    dy[i] = max + 1;
+    answer = Math.max(answer, dy[i]);
   }
-  answer = dy[n];
 
   return answer;
 }
-
-console.log(solution(7));
+let arr = [5, 3, 7, 8, 6, 2, 9, 4];
+console.log(solution(arr));
