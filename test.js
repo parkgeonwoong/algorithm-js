@@ -1,24 +1,62 @@
-function solution(m, arr) {
-  let answer = 0;
-  let dy = Array.from({ length: m + 1 }, () => 0);
+function solution(gates, airlines) {
+  let answer = [];
+  let n = gates.length;
+  // 정렬
+  for (let x of gates) x.sort((a, b) => b - a);
+  airlines.sort((a, b) => b - a);
 
-  for (let i = 0; i < arr.length; i++) {
-    let ps = arr[i][0];
-    let pt = arr[i][1];
-    for (let j = m; j >= pt; j--) {
-      dy[j] = Math.max(dy[j], dy[j - pt] + ps);
+  // 비교 배열 생성
+  let temp = Array.from({ length: n }, () => Array(gates[0].length).fill(0));
+
+  for (let i = 0; i < n; i++) {
+    let air = [...airlines];
+
+    for (let j = 0; j < gates[0].length; j++) {
+      for (let k = 0; k < airlines.length; k++) {
+        if (air[k] >= gates[i][j]) {
+          air[k] -= gates[i][j];
+          temp[i][j] = gates[i][j];
+          break;
+        }
+      }
     }
   }
-  answer = dy[m];
 
-  return answer;
+  // console.log(gates);
+  // console.log(temp);
+
+  for (let i = 0; i < n; i++) {
+    if (gates[i].toString() === temp[i].toString()) answer.push(i + 1);
+  }
+
+  return answer.length === 0 ? [-1] : answer;
 }
 
-let arr = [
-  [10, 5],
-  [25, 12],
-  [15, 8],
-  [6, 3],
-  [7, 4],
-];
-console.log(solution(20, arr));
+console.log(
+  "결과: ",
+  solution(
+    [
+      [1, 1, 5, 3],
+      [2, 2, 3, 3],
+      [1, 1, 4, 4],
+      [1, 0, 3, 6],
+      [0, 2, 5, 3],
+    ],
+    [3, 2, 5]
+  )
+);
+
+console.log(
+  "결과: ",
+  solution(
+    [
+      [1, 1, 1, 1, 2],
+      [0, 0, 0, 0, 6],
+      [0, 2, 1, 1, 2],
+      [2, 0, 2, 0, 2],
+    ],
+    [0, 2, 4]
+  )
+);
+
+console.log("결과: ", solution([[3], [3], [3]], [1, 1, 1]));
