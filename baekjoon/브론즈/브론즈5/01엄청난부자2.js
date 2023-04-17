@@ -1,3 +1,7 @@
+/**
+ * 1271번
+ */
+
 const fileName = process.platform === "linux" ? "/dev/stdin" : "input.txt";
 
 const input = require("fs")
