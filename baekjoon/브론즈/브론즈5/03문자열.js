@@ -1,3 +1,7 @@
+/**
+ * 9086
+ */
+
 const fileName = process.platform === "linux" ? "/dev/stdin" : "input.txt";
 const input = require("fs")
   .readFileSync(fileName)
@@ -8,6 +12,19 @@ const input = require("fs")
 
 console.log(input);
 
+function solution(str) {
+  let answer = [];
+  for (let x of str) {
+    for (let i = 0; i < x.length; i++) {
+      answer.push(x[0] + x[x.length - 1]);
+      break;
+    }
+  }
+  return answer.join("\n");
+}
+console.log(solution(input));
+
+// 다른 방법
 function solution(str) {
   let answer = [];
   for (let x of str) {
