@@ -3,16 +3,20 @@ const input = require("fs")
   .readFileSync(fileName)
   .toString()
   .trim()
-  .split("\n")
-  .map((v) => (isNaN(v) ? v : +v));
+  .split(" ")
+  .map(Number);
 
 console.log(input);
 
-function solution(str) {
-  let answer = [];
-  for (let x of str) {
-    if (isNaN(x)) answer.push(x.slice(0, 1) + x.slice(-1));
+function solution(n) {
+  const [a, b, c] = n;
+
+  if (a === b && a === c && b === c) return 10000 + a * 1000;
+  if (a !== b || a !== c || b !== c) {
+    if (a === b || a === c) return 1000 + a * 100;
+    if (b === c) return 1000 + b * 100;
   }
-  return answer.join("\n");
+
+  if (a !== b && a !== c && b !== c) return Math.max(...n) * 100;
 }
 console.log(solution(input));
