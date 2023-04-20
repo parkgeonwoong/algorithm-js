@@ -9,14 +9,8 @@ const input = require("fs")
 console.log(input);
 
 function solution(n) {
-  const [a, b, c] = n;
-
-  if (a === b && a === c && b === c) return 10000 + a * 1000;
-  if (a !== b || a !== c || b !== c) {
-    if (a === b || a === c) return 1000 + a * 100;
-    if (b === c) return 1000 + b * 100;
-  }
-
-  if (a !== b && a !== c && b !== c) return Math.max(...n) * 100;
+  const [r1, avg] = n;
+  let r2 = avg * 2 - r1;
+  return r2;
 }
 console.log(solution(input));
