@@ -1,3 +1,7 @@
+/**
+ * 5575
+ */
+
 const fileName = process.platform === "linux" ? "/dev/stdin" : "input.txt";
 const input = require("fs")
   .readFileSync(fileName)
@@ -8,6 +12,30 @@ const input = require("fs")
 
 console.log(input);
 
+function solution(time) {
+  let answer = [];
+
+  for (let x of time) {
+    let [sh, sm, ss, eh, em, es] = x;
+    let h = (m = s = 0);
+
+    if (es - ss < 0) {
+      s = 60 + es - ss;
+      em -= 1;
+    } else s = es - ss;
+
+    if (em - sm < 0) {
+      m = 60 + em - sm;
+      eh -= 1;
+    } else m = em - sm;
+
+    h = eh - sh;
+    answer.push([h, m, s]);
+  }
+  return answer.map((v) => v.join(" ")).join("\n");
+}
+
+// 다른 사람풀이
 function solution(time) {
   let answer = [];
   for (let x of time) {
@@ -22,4 +50,5 @@ function solution(time) {
   }
   return answer.join("\n");
 }
+
 console.log(solution(input));
