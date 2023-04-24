@@ -1,3 +1,6 @@
+/**
+ * ReadLine
+ */
 const readline = require("readline").createInterface({
   input: process.stdin,
   output: process.stdout,
@@ -21,3 +24,19 @@ function solution(input) {
   console.log(input);
 }
 solution();
+
+/**
+ * ReadFile
+ */
+
+const fileName = process.platform === "linux" ? "/dev/stdin" : "input.txt";
+const input2 = require("fs")
+  .readFileSync(fileName)
+  .toString()
+  .trim()
+  .split("\n");
+
+console.log(input);
+
+function solution(s) {}
+console.log(solution(input));
