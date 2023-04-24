@@ -1,3 +1,7 @@
+/**
+ * 2441
+ */
+
 const fileName = process.platform === "linux" ? "/dev/stdin" : "input.txt";
 const input = require("fs")
   .readFileSync(fileName)
@@ -8,6 +12,19 @@ const input = require("fs")
 
 console.log(input);
 
+function solution(n) {
+  let answer = [];
+  for (let i = 0; i < n; i++) {
+    let str = "";
+    for (let k = 0; k < i; k++) str += " ";
+    for (let j = n - i; j > 0; j--) str += "*";
+
+    answer.push(str);
+  }
+  return answer.join("\n");
+}
+
+// 다른방법
 function solution(n) {
   let answer = [];
 
@@ -21,4 +38,5 @@ function solution(n) {
   }
   return answer.join("\n");
 }
+
 console.log(solution(input[0]));
