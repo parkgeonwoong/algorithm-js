@@ -3,20 +3,21 @@ const input = require("fs")
   .readFileSync(fileName)
   .toString()
   .trim()
-  .split("\n")
-  .map((v) => v.split(" ").map(Number));
+  .split(" ")
+  .map(Number);
 
 console.log(input);
 
 function solution(n) {
-  let answer = 0;
-  let sum = 0;
+  const [a, b] = n;
+  let answer = [];
+  let i = 1;
 
-  n.forEach((v) => {
-    sum += v[1] - v[0];
-    answer = Math.max(sum, answer);
-  });
+  while (i <= a) {
+    if (a % i === 0) answer.push(i);
+    i++;
+  }
 
-  return answer;
+  return answer[b - 1] ? answer[b - 1] : 0;
 }
 console.log(solution(input));
