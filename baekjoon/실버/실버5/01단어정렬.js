@@ -1,3 +1,10 @@
+/**
+ * 1181
+ *
+ * 1. 길이도 정렬이 가능
+ * 2. 문자 정렬은 비교 >,< 1,-1로 하자
+ */
+
 const fileName = process.platform === "linux" ? "/dev/stdin" : "input.txt";
 const input = require("fs")
   .readFileSync(fileName)
