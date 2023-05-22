@@ -5,45 +5,23 @@ const input = require("fs")
   .trim()
   .split("\n")
   .slice(1)
-  .map((v) => v.split(" ").map(Number));
+  .map((v) => v.split(" ").map(Number))
+  .flat();
 
 console.log(input);
 
 function solution(arr) {
-  const N = arr.length;
+  let answer = 0;
 
-  if (N === 1) return [arr, 0];
-  else {
-    const mid = Math.floor(N / 2);
-    const [left, leftCount] = solution(arr.slice(0, mid));
-    const [right, rightCount] = solution(arr.slice(mid));
-    const [merged, mergeCount] = merge(left, right);
-    return [merged, leftCount + rightCount + mergeCount];
+  const isPrime = (num) => {
+    if (num === 1) return false;
+    for (let i = 2; i <= Math.sqrt(num); i++) if (num % i === 0) return false;
+    return true;
+  };
+
+  for (let x of arr) {
+    isPrime(x) ? answer++ : null;
   }
+  return answer;
 }
-
-function merge(left, right) {
-  let i = (j = 0);
-  let result = [];
-  let cnt = 0;
-
-  while (i < left.length && j < right.length) {
-    if (left[i] < right[j]) {
-      result.push(left[i++]);
-    } else {
-      result.push(right[j++]);
-      cnt += left.length - i;
-    }
-  }
-
-  while (i < left.length) {
-    result.push(left[i++]);
-  }
-  while (j < right.lenght) {
-    result.push(right[j++]);
-  }
-
-  return [result, cnt];
-}
-
-console.log(solution(input[0])[1]);
+console.log(solution(input));
