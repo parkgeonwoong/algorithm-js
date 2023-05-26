@@ -1,3 +1,8 @@
+/**
+ * 1009
+ * 거듭제곱 메소드를 사용하면 값이 너무 커져서 초과 -> 일의 자리만 따져봄
+ */
+
 const fileName = process.platform === "linux" ? "/dev/stdin" : "input.txt";
 const input = require("fs")
   .readFileSync(fileName)
