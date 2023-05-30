@@ -3,15 +3,14 @@ const input = require("fs")
   .readFileSync(fileName)
   .toString()
   .trim()
-  .split(" ")
-  .map(Number);
+  .split("\n")
+  .map((v) => v.split(" ").map(Number));
 
 console.log(input);
 
-function solution(arr) {
-  const [a, b] = arr;
-  const gcd = (a, b) => (a % b === 0 ? b : gcd(b, a % b));
-  const lcm = (a, b) => (a * b) / gcd(a, b);
-  return [gcd(a, b), lcm(a, b)].join("\n");
+function solution(input) {
+  const [[N, k], [...arr]] = input;
+  arr.sort((a, b) => b - a);
+  return arr[k - 1];
 }
 console.log(solution(input));
