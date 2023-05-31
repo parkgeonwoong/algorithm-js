@@ -1,3 +1,9 @@
+/**
+ * 9012
+ * 1. ) 이것만 있을 경우 예외처리
+ * 2. 중복 answer.push 방지 flag
+ */
+
 const fileName = process.platform === "linux" ? "/dev/stdin" : "input.txt";
 const input = require("fs")
   .readFileSync(fileName)
