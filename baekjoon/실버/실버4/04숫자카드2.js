@@ -1,3 +1,9 @@
+/**
+ * 10816
+ * 1. 이중 for문은 시간초과 발생
+ * 2. Map을 사용해서 빠르게 찾는 방법
+ */
+
 const fileName = process.platform === "linux" ? "/dev/stdin" : "input.txt";
 const input = require("fs")
   .readFileSync(fileName)
