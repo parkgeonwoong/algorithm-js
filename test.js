@@ -1,27 +1,20 @@
-function solution(s, e) {
-  Number.MAX_SAFE_INTEGER;
-
+function solution(number) {
   let answer = 0;
-  let chk = Array.from({ length: 10001 }, () => 0);
-  let dis = Array.from({ length: 10001 }, () => 0);
-  let queue = [];
-  queue.push(s);
-  chk[s] = 1;
-  dis[s] = 0;
+  let n = number.length;
 
-  while (queue.length) {
-    let x = queue.shift();
-    for (let nx of [x - 1, x + 1, x + 5]) {
-      if (nx === e) return dis[x] + 1;
-      if (nx > 0 && nx <= 10000 && chk[nx] === 0) {
-        chk[nx] = 1;
-        queue.push(nx);
-        dis[nx] = dis[x] + 1;
+  function DFS(L, total, start) {
+    if (L > 3) return;
+    if (L === 3) {
+      answer += total === 0 ? 1 : 0;
+    } else {
+      for (let i = start; i < n; i++) {
+        DFS(L + 1, total + number[i], i + 1);
       }
     }
   }
 
+  DFS(0, 0, 0);
   return answer;
 }
 
-console.log(solution(5, 14));
+console.log(solution([-2, 3, 0, 2, -5]));

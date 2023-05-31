@@ -13,9 +13,8 @@ function solution(number) {
 
   function DFS(L, total) {
     if (L > 3) return;
-    if (total === 0 && L === 3) {
-      answer++;
-    } else {
+    if (total === 0 && L === 3) answer++;
+    else {
       for (let i = 0; i < n; i++) {
         if (chk[i] !== 1) {
           chk[i] = 1;
@@ -27,6 +26,25 @@ function solution(number) {
   }
   DFS(0, 0);
   return answer / 6;
+}
+
+// 리팩토링
+function solution(number) {
+  let answer = 0;
+  let n = number.length;
+
+  function DFS(L, total, start) {
+    if (L > 3) return;
+    if (L === 3) answer += total === 0 ? 1 : 0;
+    else {
+      for (let i = start; i < n; i++) {
+        DFS(L + 1, total + number[i], i + 1);
+      }
+    }
+  }
+
+  DFS(0, 0, 0);
+  return answer;
 }
 
 // 다른사람 풀이
