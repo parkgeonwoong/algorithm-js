@@ -1,3 +1,8 @@
+/**
+ * 10811
+ * 배열을 뒤집은 상태에서 교체하는 방법은 splice로 인덱스부터 몇개만큼 지우고 나서 거기다가 넣는방법이다.
+ */
+
 const fileName = process.platform === "linux" ? "/dev/stdin" : "input.txt";
 const input = require("fs")
   .readFileSync(fileName)
