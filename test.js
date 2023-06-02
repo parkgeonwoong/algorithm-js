@@ -1,20 +1,16 @@
-function solution(number) {
-  let answer = 0;
-  let n = number.length;
+function solution(sizes) {
+  const dimension = sizes.map(([a, b]) => [Math.max(a, b), Math.min(a, b)]);
+  const width = dimension.map(([w, _]) => w);
+  const height = dimension.map(([_, h]) => h);
 
-  function DFS(L, total, start) {
-    if (L > 3) return;
-    if (L === 3) {
-      answer += total === 0 ? 1 : 0;
-    } else {
-      for (let i = start; i < n; i++) {
-        DFS(L + 1, total + number[i], i + 1);
-      }
-    }
-  }
-
-  DFS(0, 0, 0);
-  return answer;
+  return Math.max(...width) * Math.max(...height);
 }
 
-console.log(solution([-2, 3, 0, 2, -5]));
+console.log(
+  solution([
+    [60, 50],
+    [30, 70],
+    [60, 30],
+    [80, 40],
+  ])
+);
