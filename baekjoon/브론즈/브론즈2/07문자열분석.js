@@ -1,3 +1,9 @@
+/**
+ * 10820
+ * 1. 예외처리는 아무것도 없는 빈값 처리
+ * 2. 정규표현식 match와 없는 값 세는 || []
+ */
+
 const fileName = process.platform === "linux" ? "/dev/stdin" : "input.txt";
 const input = require("fs").readFileSync(fileName).toString().split("\n");
 
