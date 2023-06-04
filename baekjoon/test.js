@@ -1,29 +1,16 @@
 const fileName = process.platform === "linux" ? "/dev/stdin" : "input.txt";
-const input = require("fs")
-  .readFileSync(fileName)
-  .toString()
-  .trim()
-  .split(" ")
-  .map(Number);
+const input = require("fs").readFileSync(fileName).toString().trim().split("");
 
 console.log(input);
 
 function solution(input) {
-  const [n, k] = input;
-  let arr = Array.from({ length: n }, (_, i) => i + 1);
-  let answer = [];
+  let answer = 10;
 
-  while (arr.length > 0) {
-    for (let i = 1; i <= k; i++) {
-      if (i === k) {
-        answer.push(arr.shift());
-      } else {
-        arr.push(arr.shift());
-      }
-    }
+  for (let i = 1; i < input.length; i++) {
+    if (input[i - 1] === input[i]) answer += 5;
+    else answer += 10;
   }
-
-  return `<${answer.join(", ")}>`;
+  return answer;
 }
 
 console.log(solution(input));
