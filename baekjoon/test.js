@@ -1,26 +1,23 @@
 const fileName = process.platform === "linux" ? "/dev/stdin" : "input.txt";
-const input = require("fs").readFileSync(fileName).toString().split("\n");
+const input = require("fs")
+  .readFileSync(fileName)
+  .toString()
+  .split("\n")
+  .map(Number);
 
 console.log(input);
 
-const t = input.filter((str) => str.length < 1);
-
-if (t.length) {
-  input.splice(input.indexOf(t[0]), 1);
-}
-
 function solution(input) {
-  const answer = [];
+  let answer = 0;
+  const [n, f] = input;
+  const tempN = Math.floor(n / 100) * 100;
 
-  for (let x of input) {
-    const lower = (x.match(/[a-z]/g) || []).length;
-    const upper = (x.match(/[A-Z]/g) || []).length;
-    const num = (x.match(/[0-9]/g) || []).length;
-    const space = (x.match(/\s/g) || []).length;
-    answer.push([lower, upper, num, space]);
+  for (let i = 0; i < 100; i++) {
+    if ((tempN + i) % f === 0) {
+      if (i < 10) return "0" + i;
+      return i;
+    }
   }
-
-  return answer.map((v) => v.join(" ")).join("\n");
 }
 
 console.log(solution(input));
