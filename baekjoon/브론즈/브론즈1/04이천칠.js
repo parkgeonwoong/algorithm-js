@@ -1,3 +1,11 @@
+/**
+ * 1924
+ * 나의 풀이를 통해서 보람참.
+ * 1. Obj로 접근생각 -> 왜냐? 월별로 주어지니까
+ * 2. 요일의 인덱스를 보고 배열로 생각
+ * 3. 전체요일수를 7로 나눈 나머지를 생각
+ */
+
 const fileName = process.platform === "linux" ? "/dev/stdin" : "input.txt";
 const input = require("fs")
   .readFileSync(fileName)
