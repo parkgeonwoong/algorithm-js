@@ -1,3 +1,8 @@
+/**
+ * 2748
+ * 로직은 문제가 없으나 JS에서 큰 수를 어떻게 표현할 것인가? -> BigInt().toString()
+ */
+
 const fileName = process.platform === "linux" ? "/dev/stdin" : "input.txt";
 const input = Number(require("fs").readFileSync(fileName).toString().trim());
 
