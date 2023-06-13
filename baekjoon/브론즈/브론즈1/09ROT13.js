@@ -1,5 +1,9 @@
+/**
+ * 11655
+ */
+
 const fileName = process.platform === "linux" ? "/dev/stdin" : "input.txt";
-const input = require("fs").readFileSync(fileName).toString().trim();
+const input = require("fs").readFileSync(fileName).toString();
 
 console.log(input);
 
