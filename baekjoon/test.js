@@ -3,19 +3,20 @@ const input = require("fs")
   .readFileSync(fileName)
   .toString()
   .trim()
-  .split("\n");
+  .split("\n")
+  .slice(1);
 
 console.log(input);
 
 function solution(input) {
-  let answer = "";
-  const maxN = Math.max(...input.map((v) => v.length));
-
-  for (let i = 0; i < maxN; i++) {
-    for (let j = 0; j < input.length; j++) {
-      answer += input[j][i] || "";
-    }
-  }
-  return answer;
+  return input
+    .map((sentence) => {
+      const words = sentence.split(" ");
+      const reverseWord = words.map((word) =>
+        word.split("").reverse().join("")
+      );
+      return reverseWord.join(" ");
+    })
+    .join("\n");
 }
 console.log(solution(input));
