@@ -1,3 +1,9 @@
+/**
+ * 1373
+ *
+ * 2진수의 값이 너무 크다면 출력이 안됨 -> 3개씩 짤라서 바꿔줘야한다.
+ */
+
 const fileName = process.platform === "linux" ? "/dev/stdin" : "input.txt";
 const input = require("fs").readFileSync(fileName).toString().trim();
 
