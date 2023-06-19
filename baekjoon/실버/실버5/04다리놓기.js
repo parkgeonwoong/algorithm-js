@@ -1,3 +1,13 @@
+/**
+ * 1010
+ *
+ * 1. 메모이제이션
+ * 2. 조합 (콤비네이션)
+ *
+ * 순열 = 순서 O, nPr
+ * 조합 = 순서 X, nCr
+ */
+
 const fileName = process.platform === "linux" ? "/dev/stdin" : "input.txt";
 const input = require("fs")
   .readFileSync(fileName)
