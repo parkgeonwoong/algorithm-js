@@ -1,3 +1,11 @@
+/**
+ * 10815
+ *
+ * 1. 배열 includes로 찾기 O(n) -> 시간초과
+ * 2. 이진탐색 O(logn)
+ * 3. Set O(1)
+ */
+
 const fileName = process.platform === "linux" ? "/dev/stdin" : "input.txt";
 const input = require("fs")
   .readFileSync(fileName)
@@ -8,6 +16,19 @@ const input = require("fs")
 
 console.log(input);
 
+function solution(input) {
+  const answer = [];
+  const N = new Set(input[1]);
+  const M = input[3];
+
+  for (let x of M) {
+    answer.push(N.has(x) ? 1 : 0);
+  }
+  return answer.join(" ");
+}
+console.log(solution(input));
+
+// 이진탐색
 const binarySearch = (arr, target) => {
   let left = 0;
   let right = arr.length - 1;
@@ -34,4 +55,3 @@ function solution(input) {
   }
   return answer.join(" ");
 }
-console.log(solution(input));
