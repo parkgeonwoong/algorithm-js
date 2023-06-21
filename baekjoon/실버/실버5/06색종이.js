@@ -1,3 +1,11 @@
+/**
+ * 2563
+ * 문제점
+ * - 300 - 겹치는 부분으로 구할려고 했으나 틀림 -> 조건이 너무많음
+ * 해결
+ * - 총넓이 배열을 만들어서 겹치는 부분을 모두 그려서 값을 구하는 방식
+ */
+
 const fileName = process.platform === "linux" ? "/dev/stdin" : "input.txt";
 const input = require("fs")
   .readFileSync(fileName)
