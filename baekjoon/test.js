@@ -3,33 +3,31 @@ const input = require("fs")
   .readFileSync(fileName)
   .toString()
   .trim()
-  .split("\n")
-  .slice(1)
-  .flatMap((v) => v.split(" ").map(Number));
+  .split("\n");
 
-console.log(input);
+// console.log(input);
 
-function solution(n) {
-  const arr = [];
-  let temp = []; // 오르막 구간 배열
+function solution(input) {
+  const answer = [];
+  const result = [];
+  const n = +input[0];
+  const values = input.slice(1);
 
-  for (let i = 0; i < n.length - 1; i++) {
-    if (n[i] < n[i + 1]) {
-      temp.push(n[i], n[i + 1]);
-      // 오르막구간 마지막
-      if (i === n.length - 2) {
-        arr.push(temp);
-      }
-    } else {
-      arr.push(temp);
-      temp = [];
-    }
+  // 1. 분리하는 과정
+  for (let i = 0; i < n; i++) {
+    const cnt = +values.splice(0, 1);
+    const rest = values.splice(0, cnt);
+    result.push(rest);
   }
 
-  const answer = arr.map((v) =>
-    v.length > 0 ? Math.max(...v) - Math.min(...v) : 0
-  );
-  return Math.max(...answer);
+  console.log(result);
+
+  // 2. 가장많이 술소비 선정
+  for (let x of result) {
+    const temp = x.map((v) => v.split(" ")).sort((a, b) => +b[1] - +a[1]);
+    answer.push(temp[0][0]);
+  }
+  return answer.join("\n");
 }
 
 console.log(solution(input));
