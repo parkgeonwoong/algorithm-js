@@ -1,24 +1,17 @@
 const fileName = process.platform === "linux" ? "/dev/stdin" : "input.txt";
-const input = require("fs").readFileSync(fileName).toString().trim().split("");
+const input = require("fs")
+  .readFileSync(fileName)
+  .toString()
+  .trim()
+  .split("\n")
+  .map((v) => v.split(" ").map(Number));
 
 console.log(input);
 
 function solution(input) {
-  const arr0 = []; // 연속된 0담는 배열
-  const arr1 = []; // 연속된 1담는 배열
+  const [[n, k], [...arr]] = input;
 
-  let s = [...input, ""];
-  let temp = "";
-
-  for (let i = 0; i < s.length - 1; i++) {
-    temp += s[i];
-    if (s[i] !== s[i + 1]) {
-      s[i] === "0" ? arr0.push(temp) : arr1.push(temp);
-      temp = "";
-    }
-  }
-
-  return Math.min(arr0.length, arr1.length);
+  return arr.sort((a, b) => a - b)[k - 1];
 }
 
 console.log(solution(input));
