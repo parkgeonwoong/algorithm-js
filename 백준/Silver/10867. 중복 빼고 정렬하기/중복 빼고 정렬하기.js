@@ -9,10 +9,11 @@ const input = require("fs")
   .flat();
 
 function solution(input) {
-  return input
-    .filter((v, i) => input.indexOf(v) === i)
-    .sort((a, b) => a - b)
-    .join(" ");
+  const set = new Set();
+  for (let x of input) {
+    set.add(x);
+  }
+  return [...set].sort((a, b) => a - b).join(" ");
 }
 
 console.log(solution(input));
