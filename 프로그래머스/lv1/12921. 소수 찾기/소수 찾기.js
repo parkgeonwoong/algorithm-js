@@ -1,3 +1,7 @@
+/**
+ * 효율성 -> 에라토스테네스 체
+ */
+
 function solution(n) {
   let answer = 0;
   const arr = Array.from({ length: n + 1 }, () => true); // 모두 소수라고 가정

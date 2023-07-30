@@ -9,22 +9,23 @@ const input = require("fs")
 function solution(input) {
   const [n, m] = input;
   const arr = Array.from({ length: n }, (_, i) => i + 1); // 1~N 배열
-  const chk = Array.from({ length: n }, () => 0);         // 중복되지 않게 체크 배열
+  const visited = Array.from({ length: n }, () => false); // 중복되지 않게 체크 배열
   const answer = [];
-  let temp = [];     // 각 만든 수열
+  let temp = []; // 각 만든 수열
 
   function DFS(L) {
     if (L === m) {
       answer.push([...temp]);
-    } else {
-      for (let i = 0; i < arr.length; i++) {
-        if (chk[i] !== 1) {
-          chk[i] = 1;
-          temp.push(arr[i]);
-          DFS(L + 1);
-          chk[i] = 0;
-          temp.pop();
-        }
+      return;
+    }
+
+    for (let i = 0; i < n; i++) {
+      if (!visited[i]) {
+        visited[i] = true;
+        temp.push(arr[i]);
+        DFS(L + 1);
+        visited[i] = false;
+        temp.pop();
       }
     }
   }

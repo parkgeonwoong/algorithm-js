@@ -1,31 +1,36 @@
-function quickSort(arr, left = 0, right = arr.length - 1) {
-  if (left >= right) return;
+function solution(N, stages) {
+  let obj = {};
 
-  const mid = Math.floor((left + right) / 2);
-  const pivot = arr[mid];
-  const partition = divide(arr, left, right, pivot);
-
-  quickSort(arr, left, partition - 1);
-  quickSort(arr, partition, right);
-
-  function divide(arr, left, right, pivot) {
-    console.log(
-      `array: ${arr}, left: ${arr[left]}, pivot: ${pivot}, right: ${arr[right]}`
-    );
-    while (left <= right) {
-      while (arr[left] < pivot) left++;
-      while (arr[right] > pivot) right--;
-
-      if (left <= right) {
-        [arr[left], arr[right]] = [arr[right], arr[left]];
-        left++;
-        right--;
-      }
-    }
-    return left;
+  for (let i = 1; i <= N; i++) {
+    const count = stages.filter((v) => v === i).length;
+    const failRate = count / stages.filter((v) => v >= i).length || 0;
+    obj[i] = failRate;
   }
-  return arr;
+
+  return Object.entries(obj)
+    .sort((a, b) => (a[1] === b[1] ? a[0] - b[0] : b[1] - a[1]))
+    .map((v) => +v[0]);
 }
 
-const sorted = quickSort([5, 8, 1, 3, 9, 4, 7]);
-console.log(sorted);
+function solution(N, stages) {
+  let nCnt = 0; // ~N번째 스테이지
+  let obj = new Object();
+
+  // N번
+  for (let i = 0; i < N; i++) {
+    let count = 0;
+    stages = stages.filter((v) => v !== nCnt); // 스테이지에 맞는 배열
+    nCnt++;
+
+    for (let x of stages) {
+      if (x === nCnt) {
+        count++;
+      }
+    }
+    obj[nCnt] = count / stages.length;
+  }
+
+  return Object.entries(obj)
+    .sort((a, b) => (a[1] === b[1] ? a[0] - b[0] : b[1] - a[1]))
+    .map((v) => +v[0]);
+}
