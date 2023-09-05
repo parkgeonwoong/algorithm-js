@@ -6,11 +6,11 @@ function solution(arr) {
     
     arr.sort((a,b) => b - a);
     
-    let answer = lcd(arr[0], arr[1]);
+    return arr.reduce((a, b) => lcd(a,b));
     
-    for(let i=2; i<arr.length; i++) {
-        answer = lcd(answer, arr[i]);
-    }
-    
-    return answer;
+    // let answer = lcd(arr[0], arr[1]);
+    // for(let i=2; i<arr.length; i++) {
+    //     answer = lcd(answer, arr[i]);
+    // }
+    // return answer;
 }
