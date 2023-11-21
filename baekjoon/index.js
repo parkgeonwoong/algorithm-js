@@ -1,65 +1,56 @@
+/**
+ * 문제: 단지번호붙이기 (2667)
+ * 연결된 집합들의 갯수만 구하는 문제
+ * 전역변수로 갯수를 세고, 조건에 맞았을 경우 +1, 다시 순회가 될때 초기화
+ */
+
 const fileName = process.platform === "linux" ? "/dev/stdin" : "input.txt";
 const input = require("fs")
   .readFileSync(fileName)
   .toString()
   .trim()
   .split("\n")
-  .map((v) => v.split(" ").map(Number));
+  .map((v) => v.split(" "));
 
-// console.log(input);
+console.log(input);
 
 function solution(input) {
-  const [T] = input.shift();
+  const [stringN, ...arr] = input;
+  const N = Number(stringN);
+  const map = arr.map((v) => String(v).split(""));
+  const visited = Array.from(Array(N), () => Array(N).fill(false));
   const answer = [];
+  let count = 0;
 
-  // 테스트케이스 갯수만큼 진행
-  for (let i = 0; i < T; i++) {
-    const [M, N, K] = input.shift();
-    const ground = Array.from({ length: M }, () => Array(N).fill(0));
-    const visted = Array.from({ length: M }, () => Array(N).fill(0)); // 방문한것 -> 중복처리 안되게
-    let cnt = 0;
+  const dx = [0, 0, -1, 1];
+  const dy = [-1, 1, 0, 0];
 
-    // 배추밭 표시
-    for (let j = 0; j < K; j++) {
-      const [x, y] = input.shift();
-      ground[x][y] = 1;
-    }
+  function DFS(x, y) {
+    for (let i = 0; i < 4; i++) {
+      const nx = x + dx[i];
+      const ny = y + dy[i];
 
-    // 상하좌우 네 방향
-    const dx = [-1, 0, 1, 0];
-    const dy = [0, 1, 0, -1];
-
-    for (let j = 0; j < M; j++) {
-      for (let k = 0; k < N; k++) {
-        if (ground[j][k] === 1 && visted[j][k] === 0) {
-          dfs(j, k);
-          cnt++;
-        }
+      if (nx >= 0 && nx < N && ny >= 0 && ny < N && !visited[nx][ny] && map[nx][ny] === "1") {
+        visited[nx][ny] = true;
+        count++;
+        DFS(nx, ny);
       }
     }
-
-    function dfs(x, y) {
-      visted[x][y] = 1;
-      for (let j = 0; j < 4; j++) {
-        const nx = x + dx[j];
-        const ny = y + dy[j];
-
-        if (
-          nx >= 0 &&
-          nx < M &&
-          ny >= 0 &&
-          ny < N &&
-          ground[nx][ny] === 1 &&
-          visted[nx][ny] === 0
-        ) {
-          dfs(nx, ny);
-        }
-      }
-    }
-    answer.push(cnt);
   }
 
-  return answer.join("\n");
+  for (let i = 0; i < N; i++) {
+    for (let j = 0; j < N; j++) {
+      if (!visited[i][j] && map[i][j] === "1") {
+        visited[i][j] = true;
+        count++;
+        DFS(i, j);
+        answer.push(count);
+        count = 0;
+      }
+    }
+  }
+
+  return [answer.length, ...answer.sort((a, b) => a - b)].join("\n");
 }
 
 console.log(solution(input));
