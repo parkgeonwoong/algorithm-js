@@ -1,7 +1,7 @@
 /**
- * 문제: 단지번호붙이기 (2667)
- * 연결된 집합들의 갯수만 구하는 문제
- * 전역변수로 갯수를 세고, 조건에 맞았을 경우 +1, 다시 순회가 될때 초기화
+ * 문제: RGB거리 (1149)
+ * 다이나믹을 2차원배열로 풀어야하는 문제
+ * 주어진 rgb줄의 두번째 줄부터 이전 줄의 색과 겹치지 않게 칠하는 비용의 최솟값을 구하는 문제
  */
 
 const fileName = process.platform === "linux" ? "/dev/stdin" : "input.txt";
@@ -10,47 +10,22 @@ const input = require("fs")
   .toString()
   .trim()
   .split("\n")
-  .map((v) => v.split(" "));
+  .map((v) => v.split(" ").map((v) => Number(v)));
 
 console.log(input);
 
 function solution(input) {
-  const [stringN, ...arr] = input;
-  const N = Number(stringN);
-  const map = arr.map((v) => String(v).split(""));
-  const visited = Array.from(Array(N), () => Array(N).fill(false));
-  const answer = [];
-  let count = 0;
+  const [[N], ...rgb] = input;
+  const dp = Array.from({ length: N }, () => Array(3).fill(0));
+  dp[0] = rgb[0];
 
-  const dx = [0, 0, -1, 1];
-  const dy = [-1, 1, 0, 0];
-
-  function DFS(x, y) {
-    for (let i = 0; i < 4; i++) {
-      const nx = x + dx[i];
-      const ny = y + dy[i];
-
-      if (nx >= 0 && nx < N && ny >= 0 && ny < N && !visited[nx][ny] && map[nx][ny] === "1") {
-        visited[nx][ny] = true;
-        count++;
-        DFS(nx, ny);
-      }
-    }
+  for (let i = 1; i < N; i++) {
+    dp[i][0] = Math.min(dp[i - 1][1], dp[i - 1][2]) + rgb[i][0];
+    dp[i][1] = Math.min(dp[i - 1][0], dp[i - 1][2]) + rgb[i][1];
+    dp[i][2] = Math.min(dp[i - 1][0], dp[i - 1][1]) + rgb[i][2];
   }
 
-  for (let i = 0; i < N; i++) {
-    for (let j = 0; j < N; j++) {
-      if (!visited[i][j] && map[i][j] === "1") {
-        visited[i][j] = true;
-        count++;
-        DFS(i, j);
-        answer.push(count);
-        count = 0;
-      }
-    }
-  }
-
-  return [answer.length, ...answer.sort((a, b) => a - b)].join("\n");
+  return Math.min(...dp[N - 1]);
 }
 
 console.log(solution(input));
